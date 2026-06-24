@@ -6,9 +6,6 @@ A color-coded statusline for Claude Code showing model, user, working directory,
 
 Example statusline with all segments visible in a git repo and 24% context window usage:
 
-<p align="center">
-  <img src="../images/statusline.png" alt="Claude Code statusline example" width="100%">
-</p>
 
 | Segment     | Color                | Example                                            |
 | ----------- | -------------------- | -------------------------------------------------- |
