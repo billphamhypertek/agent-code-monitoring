@@ -254,6 +254,11 @@ db.exec(`
 
   -- Composite indexes for frequent query patterns (columns that exist at table creation time)
   CREATE INDEX IF NOT EXISTS idx_events_session_type ON events(session_id, event_type);
+  -- Dedup lookups during history import (and runtime agent-scoped queries) filter
+  -- by agent_id + event_type. Without this they fall back to idx_events_type and
+  -- scan every event of that type (e.g. all PreToolUse rows) per call, which is
+  -- O(n^2) over a large transcript backlog and pegs a CPU core. See import-history.js.
+  CREATE INDEX IF NOT EXISTS idx_events_agent_type ON events(agent_id, event_type);
   CREATE INDEX IF NOT EXISTS idx_agents_session_type ON agents(session_id, type);
   CREATE INDEX IF NOT EXISTS idx_dashboard_runs_started ON dashboard_runs(started_at DESC);
   CREATE INDEX IF NOT EXISTS idx_dashboard_runs_session ON dashboard_runs(session_id);
