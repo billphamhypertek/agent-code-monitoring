@@ -7,7 +7,7 @@
 # 4. Detect Changed Paths: A `dorny/paths-filter` job that flags `desktop/**` (or workflow) changes so the desktop job below stays
 #    path-filtered without hard-coding a branch name.
 # 5. Desktop Apps (DMG + EXE): Builds the Electron desktop app for macOS on `macos-latest` (uploads two
-#    `ClaudeCodeMonitor-*.dmg` artifacts, arm64 + x64) and for Windows on `windows-latest` (uploads `ClaudeCodeMonitor-win`:
+#    `AgentCodeMonitoring-*.dmg` artifacts, arm64 + x64) and for Windows on `windows-latest` (uploads `AgentCodeMonitoring-win`:
 #    an NSIS installer + a no-install portable `.exe`). Universal macOS builds were dropped because @electron/universal's
 #    merge step hangs/errors on this repo's extraResources layout (parent-path sources); two single-arch DMGs ship the same
 #    payload without the merge step. Both jobs run on any push, when the changes job flagged `desktop/**`, or when a PR
@@ -194,7 +194,7 @@ jobs:
             fi
             echo "::endgroup::"
             echo "DMG build attempt ${attempt} failed; detaching stale volumes"
-            for vol in "/Volumes/Claude Code Monitor"*; do
+            for vol in "/Volumes/Agent Code Monitoring"*; do
               [ -d "${vol}" ] && hdiutil detach -force "${vol}" || true
             done
             sleep 10
@@ -217,7 +217,7 @@ jobs:
       - name: Upload DMG artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ClaudeCodeMonitor-dmg
+          name: AgentCodeMonitoring-dmg
           path: desktop/release/*.dmg
           retention-days: 14
 
@@ -226,7 +226,7 @@ jobs:
   #   Mirrors the macOS desktop job on windows-latest. Runs on any  #
   #   push, when the changes job flagged desktop/**, or when a PR    #
   #   carries the 'desktop' label. Produces an NSIS installer and a  #
-  #   no-install portable .exe, uploaded as ClaudeCodeMonitor-win.   #
+  #   no-install portable .exe, uploaded as AgentCodeMonitoring-win.   #
   # ────────────────────────────────────────────────────────────────
   desktop-win:
     name: "🪟 Windows Desktop (EXE)"
@@ -289,7 +289,7 @@ jobs:
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ClaudeCodeMonitor-win
+          name: AgentCodeMonitoring-win
           path: desktop/release/*.exe
           retention-days: 14
 
@@ -393,14 +393,14 @@ jobs:
         if: steps.check.outputs.exists == 'false'
         uses: actions/download-artifact@v4
         with:
-          name: ClaudeCodeMonitor-dmg
+          name: AgentCodeMonitoring-dmg
           path: dmg
 
       - name: Download Windows EXE artifact
         if: steps.check.outputs.exists == 'false'
         uses: actions/download-artifact@v4
         with:
-          name: ClaudeCodeMonitor-win
+          name: AgentCodeMonitoring-win
           path: win
 
       - name: Publish release

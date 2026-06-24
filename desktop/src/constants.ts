@@ -3,7 +3,7 @@
  * @author Binh Pham <binhps@hypertek.global>
  */
 
-export const APP_NAME = "Claude Code Monitor";
+export const APP_NAME = "Agent Code Monitoring";
 
 /**
  * Application identifier. Must match `appId` in electron-builder.yml: on Windows

@@ -15,13 +15,13 @@ let statusBarItem;
 let outputChannel;
 
 function activate(context) {
-  outputChannel = vscode.window.createOutputChannel("Claude Code Monitor");
+  outputChannel = vscode.window.createOutputChannel("Agent Code Monitoring");
   outputChannel.appendLine("[activate] " + new Date().toISOString());
   context.subscriptions.push(outputChannel);
 
   const statusProvider = new DashboardWebviewProvider(context, outputChannel);
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider("claude-code-monitor-view", statusProvider, {
+    vscode.window.registerWebviewViewProvider("agent-code-monitoring-view", statusProvider, {
       webviewOptions: { retainContextWhenHidden: true },
     })
   );
@@ -82,14 +82,11 @@ function activate(context) {
     }
   );
 
-  let refreshStatus = vscode.commands.registerCommand(
-    "agent-code-monitoring.refreshStatus",
-    () => {
-      statusProvider.refresh();
-      updateStatusBar();
-      vscode.window.showInformationMessage("Claude Code Monitor refreshed.");
-    }
-  );
+  let refreshStatus = vscode.commands.registerCommand("agent-code-monitoring.refreshStatus", () => {
+    statusProvider.refresh();
+    updateStatusBar();
+    vscode.window.showInformationMessage("Agent Code Monitoring refreshed.");
+  });
 
   let clearHistory = vscode.commands.registerCommand(
     "agent-code-monitoring.clearHistory",
@@ -282,7 +279,7 @@ function getErrorHtml() {
                 </svg>
             </div>
             <h1>Dashboard Offline</h1>
-            <div class="subtitle">Unable to connect to the Claude Code Monitor server</div>
+            <div class="subtitle">Unable to connect to the Agent Code Monitoring server</div>
         </div>
 
         <div class="main-card">

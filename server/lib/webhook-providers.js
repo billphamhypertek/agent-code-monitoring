@@ -78,7 +78,7 @@ function formatDiscord(alert) {
   if (alert.agent_id)
     fields.push({ name: "Agent", value: truncate(alert.agent_id, 1024), inline: true });
   return {
-    username: "Claude Code Monitor",
+    username: "Agent Code Monitoring",
     embeds: [
       {
         title: truncate(`🔔 ${alert.rule_name}`, 256),
@@ -144,7 +144,7 @@ function formatGoogleChat(alert) {
 // Mattermost incoming webhook — Slack-compatible (legacy attachments).
 function formatMattermost(alert) {
   return {
-    username: "Claude Code Monitor",
+    username: "Agent Code Monitoring",
     text: `🔔 **${alert.rule_name}**`,
     attachments: [
       {
@@ -161,7 +161,7 @@ function formatMattermost(alert) {
 // Rocket.Chat incoming webhook — text + Slack-style attachments.
 function formatRocketChat(alert) {
   return {
-    alias: "Claude Code Monitor",
+    alias: "Agent Code Monitoring",
     text: `🔔 *${alert.rule_name}*`,
     attachments: [
       {

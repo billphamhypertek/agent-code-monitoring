@@ -14,7 +14,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onView:claude-code-monitor-view"
+    "onView:agent-code-monitoring-view"
   ],
   "main": "./extension.js",
   "icon": "apple-touch-icon.png",
@@ -57,16 +57,16 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "claude-code-monitor",
+          "id": "agent-code-monitoring",
           "title": "Agent Code Monitoring",
           "icon": "icon.svg"
         }
       ]
     },
     "views": {
-      "claude-code-monitor": [
+      "agent-code-monitoring": [
         {
-          "id": "claude-code-monitor-view",
+          "id": "agent-code-monitoring-view",
           "name": "Monitor Control Center",
           "type": "webview"
         }
@@ -76,17 +76,17 @@
       "view/title": [
         {
           "command": "agent-code-monitoring.openDashboard",
-          "when": "view == claude-code-monitor-view",
+          "when": "view == agent-code-monitoring-view",
           "group": "navigation@1"
         },
         {
           "command": "agent-code-monitoring.refreshStatus",
-          "when": "view == claude-code-monitor-view",
+          "when": "view == agent-code-monitoring-view",
           "group": "navigation@2"
         },
         {
           "command": "agent-code-monitoring.openInBrowser",
-          "when": "view == claude-code-monitor-view",
+          "when": "view == agent-code-monitoring-view",
           "group": "navigation@3"
         }
       ]

@@ -2044,12 +2044,12 @@ npm run mcp:start:repl         # interactive CLI with tab completion</code></pre
                 <tr>
                   <td><code>desktop:win</code></td>
                   <td><code>npm run desktop:win</code></td>
-                  <td>Build the Windows NSIS installer <code>ClaudeCodeMonitor-Setup-&lt;ver&gt;-x64.exe</code> (Windows host)</td>
+                  <td>Build the Windows NSIS installer <code>AgentCodeMonitoring-Setup-&lt;ver&gt;-x64.exe</code> (Windows host)</td>
                 </tr>
                 <tr>
                   <td><code>desktop:win:portable</code></td>
                   <td><code>npm run desktop:win:portable</code></td>
-                  <td>Build the no-install portable <code>ClaudeCodeMonitor-&lt;ver&gt;-x64-portable.exe</code> (Windows host)</td>
+                  <td>Build the no-install portable <code>AgentCodeMonitoring-&lt;ver&gt;-x64-portable.exe</code> (Windows host)</td>
                 </tr>
                 <tr>
                   <td><code>build:win-icon</code></td>
@@ -4142,12 +4142,12 @@ acm-export all --output backup.json</code></pre>
           </p>
 
           <div class="screenshot-card" style="margin: 8px 0 32px;">
-            <img src="../images/macos.png" alt="Claude Code Monitor running as a native desktop app" width="100%" loading="lazy" decoding="async" />
+            <img src="../images/macos.png" alt="Agent Code Monitoring running as a native desktop app" width="100%" loading="lazy" decoding="async" />
             <div class="screenshot-caption"><span class="caption-icon">🍎🪟</span> <span>The full dashboard, natively on macOS <strong>and</strong> Windows — same React client, same Express server, real <code>BrowserWindow</code>. Menu-bar / notification-area (tray) icon included. Shipped as a macOS DMG and a Windows EXE (macOS shown) — see <a href="https://github.com/billphamhypertek/agent-code-monitoring/blob/master/DESKTOP.md"><code>DESKTOP.md</code></a>.</span></div>
           </div>
 
           <div class="screenshot-card" style="margin: 8px 0 32px;">
-            <img src="../images/windows_app.png" alt="Claude Code Monitor running as a native desktop app on Windows, showing the Activity Feed, native Windows window menu, and Tabby companion" width="100%" loading="lazy" decoding="async" />
+            <img src="../images/windows_app.png" alt="Agent Code Monitoring running as a native desktop app on Windows, showing the Activity Feed, native Windows window menu, and Tabby companion" width="100%" loading="lazy" decoding="async" />
             <div class="screenshot-caption"><span class="caption-icon">🪟</span> <span>The same dashboard as a native <strong>Windows</strong> app — real <code>BrowserWindow</code> with the native Windows window menu, live Activity Feed, and the Tabby companion. A notification-area (system tray) icon sits beside the clock for quick access.</span></div>
           </div>
 
@@ -4304,8 +4304,8 @@ acm-export all --output backup.json</code></pre>
               <p>
                 The SQLite database and VAPID keys live in a per-user app-data directory
                 <em>outside</em> the application bundle / install dir —
-                <code>~/Library/Application Support/Claude Code Monitor/data/</code> on macOS,
-                <code>%APPDATA%\Claude Code Monitor\data\</code> on Windows.
+                <code>~/Library/Application Support/Agent Code Monitoring/data/</code> on macOS,
+                <code>%APPDATA%\Agent Code Monitoring\data\</code> on Windows.
                 <code>server-host.ts</code> points <code>DASHBOARD_DATA_DIR</code> at that
                 per-user directory on boot. Because a packaged, code-signed, or
                 app-translocated bundle is read-only, older builds that stored the database
@@ -4332,8 +4332,8 @@ acm-export all --output backup.json</code></pre>
                 make sure <code>claude</code> is a real executable on your <code>PATH</code> — a
                 shell alias or function cannot be spawned — and check the
                 <code>user PATH resolved</code> line in the desktop log
-                (<code>~/Library/Logs/Claude Code Monitor/desktop.log</code> on macOS,
-                <code>%APPDATA%\Claude Code Monitor\logs\desktop.log</code> on Windows).
+                (<code>~/Library/Logs/Agent Code Monitoring/desktop.log</code> on macOS,
+                <code>%APPDATA%\Agent Code Monitoring\logs\desktop.log</code> on Windows).
               </p>
             </div>
           </div>
@@ -4411,22 +4411,22 @@ acm-export all --output backup.json</code></pre>
               <tbody>
                 <tr>
                   <td>macOS (Apple Silicon)</td>
-                  <td><code>ClaudeCodeMonitor-&lt;ver&gt;-arm64.dmg</code></td>
+                  <td><code>AgentCodeMonitoring-&lt;ver&gt;-arm64.dmg</code></td>
                   <td>Drag the <code>.app</code> into <code>/Applications</code></td>
                 </tr>
                 <tr>
                   <td>macOS (Intel)</td>
-                  <td><code>ClaudeCodeMonitor-&lt;ver&gt;-x64.dmg</code></td>
+                  <td><code>AgentCodeMonitoring-&lt;ver&gt;-x64.dmg</code></td>
                   <td>Drag the <code>.app</code> into <code>/Applications</code></td>
                 </tr>
                 <tr>
                   <td>Windows (installer)</td>
-                  <td><code>ClaudeCodeMonitor-Setup-&lt;ver&gt;-x64.exe</code></td>
+                  <td><code>AgentCodeMonitoring-Setup-&lt;ver&gt;-x64.exe</code></td>
                   <td>NSIS installer — per-user, no admin elevation</td>
                 </tr>
                 <tr>
                   <td>Windows (portable)</td>
-                  <td><code>ClaudeCodeMonitor-&lt;ver&gt;-x64-portable.exe</code></td>
+                  <td><code>AgentCodeMonitoring-&lt;ver&gt;-x64-portable.exe</code></td>
                   <td>Run without installing</td>
                 </tr>
               </tbody>
@@ -4438,9 +4438,9 @@ acm-export all --output backup.json</code></pre>
             Want a build straight off the tip of <code>master</code>, ahead of the next tagged
             release? Every green run of the <code>🍎 macOS Desktop (DMG)</code> job on
             <code>macos-latest</code> uploads the universal DMG as the
-            <code>ClaudeCodeMonitor-dmg</code> workflow artifact, and the
+            <code>AgentCodeMonitoring-dmg</code> workflow artifact, and the
             <code>🪟 Windows Desktop (EXE)</code> job on <code>windows-latest</code> uploads the
-            installer + portable EXEs as the <code>ClaudeCodeMonitor-win</code> artifact. Open
+            installer + portable EXEs as the <code>AgentCodeMonitoring-win</code> artifact. Open
             the
             <a href="https://github.com/billphamhypertek/agent-code-monitoring/actions/workflows/ci.yml?query=branch%3Amaster+is%3Asuccess"
                target="_blank" rel="noopener noreferrer"
@@ -4449,7 +4449,7 @@ acm-export all --output backup.json</code></pre>
               latest passing run
             </a>,
             scroll to its Artifacts section, and download
-            <code>ClaudeCodeMonitor-dmg</code> or <code>ClaudeCodeMonitor-win</code>. (GitHub
+            <code>AgentCodeMonitoring-dmg</code> or <code>AgentCodeMonitoring-win</code>. (GitHub
             sign-in required; 14-day retention.)
           </p>
 
@@ -4476,14 +4476,14 @@ npm run desktop:dmg:x64      # Intel only — fast
 npm run desktop:dmg          # universal (x64 + arm64) — for release, SLOW
 
 # 4b. ON Windows — build an EXE, pick ONE:
-npm run desktop:win          # NSIS installer → ClaudeCodeMonitor-Setup-<ver>-x64.exe
-npm run desktop:win:portable # no-install portable → ClaudeCodeMonitor-<ver>-x64-portable.exe
+npm run desktop:win          # NSIS installer → AgentCodeMonitoring-Setup-<ver>-x64.exe
+npm run desktop:win:portable # no-install portable → AgentCodeMonitoring-<ver>-x64-portable.exe
 
 # electron-builder packages for the HOST OS — build DMGs on a Mac, EXEs on Windows.
 # Each desktop:dmg* build wipes release/ first and emits a single arch-labelled
-# DMG, so the volume title states the architecture (e.g. "Claude Code Monitor
+# DMG, so the volume title states the architecture (e.g. "Agent Code Monitoring
 # (Apple Silicon)") — no ambiguity when more than one DMG is on disk.
-open desktop/release/ClaudeCodeMonitor-*-arm64.dmg   # match the arch you built</code></pre>
+open desktop/release/AgentCodeMonitoring-*-arm64.dmg   # match the arch you built</code></pre>
 
           <div class="callout callout-warning">
             <div class="callout-icon">⚠</div>
@@ -4497,7 +4497,7 @@ open desktop/release/ClaudeCodeMonitor-*-arm64.dmg   # match the arch you built<
                 (Apple Silicon) or <code>desktop:dmg:x64</code> (Intel) — one architecture,
                 no merge, finishing in roughly a minute instead of many. Reserve the universal
                 build for release artifacts; CI already produces one as
-                <code>ClaudeCodeMonitor-dmg</code>, so you rarely need to build it yourself.
+                <code>AgentCodeMonitoring-dmg</code>, so you rarely need to build it yourself.
               </p>
             </div>
           </div>
@@ -4514,7 +4514,7 @@ open desktop/release/ClaudeCodeMonitor-*-arm64.dmg   # match the arch you built<
             <div class="qs-card">
               <div class="qs-step">2</div>
               <h3>Drag to Applications</h3>
-              <p>Drag <code>Claude Code Monitor.app</code> into your <code>Applications</code> folder</p>
+              <p>Drag <code>Agent Code Monitoring.app</code> into your <code>Applications</code> folder</p>
             </div>
             <div class="qs-card">
               <div class="qs-step">3</div>
@@ -4542,7 +4542,7 @@ open desktop/release/ClaudeCodeMonitor-*-arm64.dmg   # match the arch you built<
           </div>
           <div class="code-header"><span class="code-lang">bash</span></div>
           <pre><code># After dragging the app into /Applications:
-xattr -cr "/Applications/Claude Code Monitor.app"</code></pre>
+xattr -cr "/Applications/Agent Code Monitoring.app"</code></pre>
           <p>
             Alternatively, open <strong>System Settings → Privacy &amp; Security</strong>,
             find the blocked app, and click <em>Open Anyway</em>. Code signing and Apple
@@ -4555,7 +4555,7 @@ xattr -cr "/Applications/Claude Code Monitor.app"</code></pre>
             <div class="qs-card">
               <div class="qs-step">1</div>
               <h3>Run the Installer</h3>
-              <p>Run <code>ClaudeCodeMonitor-Setup-&lt;ver&gt;-x64.exe</code> — a per-user NSIS install (no admin), or run the <code>*-portable.exe</code> to skip installing</p>
+              <p>Run <code>AgentCodeMonitoring-Setup-&lt;ver&gt;-x64.exe</code> — a per-user NSIS install (no admin), or run the <code>*-portable.exe</code> to skip installing</p>
             </div>
             <div class="qs-card">
               <div class="qs-step">2</div>
@@ -4576,7 +4576,7 @@ xattr -cr "/Applications/Claude Code Monitor.app"</code></pre>
 
           <div class="screenshot-card" style="margin: 8px 0 32px;">
             <img src="../images/setup_win_wizard2.png" alt="Windows NSIS installer step 2 — Choose Install Location" width="100%" loading="lazy" decoding="async" />
-            <div class="screenshot-caption"><span class="caption-icon">2️⃣</span> <span>NSIS installer, step 2 — <strong>Choose Install Location</strong>: defaults to <code>%LOCALAPPDATA%\Programs\Claude Code Monitor</code>, or point it anywhere.</span></div>
+            <div class="screenshot-caption"><span class="caption-icon">2️⃣</span> <span>NSIS installer, step 2 — <strong>Choose Install Location</strong>: defaults to <code>%LOCALAPPDATA%\Programs\Agent Code Monitoring</code>, or point it anywhere.</span></div>
           </div>
 
           <div class="screenshot-card" style="margin: 8px 0 32px;">
@@ -4594,7 +4594,7 @@ xattr -cr "/Applications/Claude Code Monitor.app"</code></pre>
                 <strong>SmartScreen</strong> may show <em>"Windows protected your PC"</em> the
                 first time you run it; click <strong>More info → Run anyway</strong>. The
                 installer lays the app down <strong>per-user</strong> under
-                <code>%LOCALAPPDATA%\Programs\Claude Code Monitor</code> (and lets you choose the
+                <code>%LOCALAPPDATA%\Programs\Agent Code Monitoring</code> (and lets you choose the
                 install directory) and sets an <code>AppUserModelId</code>
                 (<code>com.billphamhypertek.acm.desktop</code>) so native toast notifications are
                 attributed correctly and the window groups under one taskbar entry.
@@ -4610,8 +4610,8 @@ xattr -cr "/Applications/Claude Code Monitor.app"</code></pre>
                 The DMG is roughly 80&nbsp;MB, about 250&nbsp;MB installed on disk — the
                 standard Electron tax; the Windows installer is comparable. The app runs
                 natively on <strong>macOS and Windows</strong>; Linux is tracked as a follow-up.
-                Logs live at <code>~/Library/Logs/Claude Code Monitor/desktop.log</code> on macOS
-                or <code>%APPDATA%\Claude Code Monitor\logs\desktop.log</code> on Windows (reach
+                Logs live at <code>~/Library/Logs/Agent Code Monitoring/desktop.log</code> on macOS
+                or <code>%APPDATA%\Agent Code Monitoring\logs\desktop.log</code> on Windows (reach
                 them from the tray menu → <em>Show Logs</em>).
               </p>
             </div>

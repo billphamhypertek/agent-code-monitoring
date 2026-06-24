@@ -14,7 +14,7 @@
 # No code changes are required to enable notarization later.
 
 appId: com.billphamhypertek.acm.desktop
-productName: Claude Code Monitor
+productName: Agent Code Monitoring
 copyright: Copyright (c) 2026 Binh Pham. MIT License.
 
 directories:
@@ -98,7 +98,7 @@ mac:
     NSRequiresAquaSystemAppearance: false
 
 dmg:
-  artifactName: "ClaudeCodeMonitor-${version}-${arch}.dmg"
+  artifactName: "AgentCodeMonitoring-${version}-${arch}.dmg"
   # The mounted-volume title carries the architecture so that, when a release/
   # directory holds more than one DMG, the Finder windows are distinguishable
   # and nobody drags an x64 build onto Apple Silicon (which triggers a Rosetta
@@ -106,7 +106,7 @@ dmg:
   # inconsistently inside `title` — it yields `-arm64` / an empty string rather
   # than `arm64` / `x64`. The per-arch `dmg:*` scripts in package.json override
   # `dmg.title` with an explicit, clean label instead.
-  title: "Claude Code Monitor"
+  title: "Agent Code Monitoring"
   icon: assets/icon.icns
   contents:
     # Left slot: the .app bundle. Do NOT set `type: file` here — electron-builder
@@ -152,15 +152,15 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
-  shortcutName: "Claude Code Monitor"
-  uninstallDisplayName: "Claude Code Monitor ${version}"
-  artifactName: "ClaudeCodeMonitor-Setup-${version}-${arch}.${ext}"
+  shortcutName: "Agent Code Monitoring"
+  uninstallDisplayName: "Agent Code Monitoring ${version}"
+  artifactName: "AgentCodeMonitoring-Setup-${version}-${arch}.${ext}"
   # Keep the per-user SQLite database + settings (under userData) on uninstall,
   # mirroring macOS where dragging the .app to Trash never touches user data.
   deleteAppDataOnUninstall: false
 
 portable:
-  artifactName: "ClaudeCodeMonitor-${version}-${arch}-portable.${ext}"
+  artifactName: "AgentCodeMonitoring-${version}-${arch}-portable.${ext}"
 
 # Notarization runs only when the Apple credentials are present (macOS only;
 # the hook is a no-op on Windows).

@@ -1,6 +1,6 @@
 {
-  "id": "claude-code-agent-code-monitoring",
-  "name": "Agent Code Monitoring - Claude Code Monitor",
+  "id": "agent-code-monitoring",
+  "name": "Agent Code Monitoring",
   "short_name": "Agent Code Monitoring",
   "description": "Real-time monitoring platform for Claude Code agent activity.",
   "author": "Binh Pham",

@@ -388,8 +388,8 @@ If you'd rather not keep a terminal open, install the optional **native desktop 
 
 The fastest path is to **download a pre-built installer** from the [latest GitHub Release](https://github.com/billphamhypertek/agent-code-monitoring/releases/latest) (CI auto-publishes a `vX.Y.Z` whenever `package.json` is bumped on `master`):
 
-- **macOS** — grab `ClaudeCodeMonitor-<version>-arm64.dmg` (Apple Silicon) or `-x64.dmg` (Intel) and drag **Claude Code Monitor.app** into `/Applications`.
-- **Windows** — grab `ClaudeCodeMonitor-Setup-<version>-x64.exe` (installer) or `ClaudeCodeMonitor-<version>-x64-portable.exe` (no-install) and run it.
+- **macOS** — grab `AgentCodeMonitoring-<version>-arm64.dmg` (Apple Silicon) or `-x64.dmg` (Intel) and drag **Agent Code Monitoring.app** into `/Applications`.
+- **Windows** — grab `AgentCodeMonitoring-Setup-<version>-x64.exe` (installer) or `AgentCodeMonitoring-<version>-x64-portable.exe` (no-install) and run it.
 
 To build it yourself instead:
 
@@ -1379,13 +1379,13 @@ For detailed developer configuration, see the [.vscode](./.vscode) and [vscode-e
 The dashboard also ships as an optional **native desktop application** you install once and forget — a macOS `.app` (distributed as a `.dmg`) and a Windows `.exe` (an NSIS installer plus a no-install portable build). It lives in the `desktop/` workspace, a sibling of `client/`, `server/`, `mcp/`, and `vscode-extension/`, and is built with **Electron 35**.
 
 <p align="center">
-  <img src="images/macos.png" alt="Claude Code Monitor running as a native desktop app" width="100%">
+  <img src="images/macos.png" alt="Agent Code Monitoring running as a native desktop app" width="100%">
   <br>
   <em>🍎🪟 <strong>Desktop App</strong> — native shell with a menu-bar / notification-area (tray) icon, Open-at-Login, and a single-instance lock. The same dashboard, in a real OS window (macOS shown).</em>
 </p>
 
 <p align="center">
-  <img src="images/windows_app.png" alt="Claude Code Monitor running as a native Windows desktop app, showing the Activity Feed with the Windows window menu bar and Tabby panel" width="100%">
+  <img src="images/windows_app.png" alt="Agent Code Monitoring running as a native Windows desktop app, showing the Activity Feed with the Windows window menu bar and Tabby panel" width="100%">
   <br>
   <em>🪟 The same dashboard as a native Windows app — notification-area (tray) icon, native window menu, and Open-at-Login.</em>
 </p>
@@ -1398,7 +1398,7 @@ Unlike running the dashboard from a terminal, the desktop app needs no `npm star
 
 ```mermaid
 flowchart LR
-    subgraph electron["Claude Code Monitor.app — one Electron process"]
+    subgraph electron["Agent Code Monitoring.app — one Electron process"]
         main["Electron Main Process<br/>Node 22 / Electron 35"]
         host["server-host.ts<br/>port discovery · adoption · ABI patch"]
         express["server/index.js<br/>Express API · SQLite · WebSocket"]
@@ -1433,14 +1433,14 @@ On launch the app:
 ### Features
 
 - **Tray icon** — always-on status surface (macOS menu bar / Windows notification area). Left-click toggles the dashboard window; right-click opens a context menu with **Open Dashboard**, **Open in Browser**, **Restart Server**, **Show Logs**, **Open at Login** (toggle), and **Quit**. macOS uses a tinted template glyph; Windows uses the colored `icon.ico` (a black template would vanish on the dark taskbar).
-- **Window & taskbar icon** — the `BrowserWindow` is wired to the colored app logo (`icon.ico` on Windows, `icon.png` elsewhere), so the title bar / taskbar show the real Claude Code Monitor icon — even an unpackaged `npm run desktop:dev` run no longer shows the generic Electron icon.
+- **Window & taskbar icon** — the `BrowserWindow` is wired to the colored app logo (`icon.ico` on Windows, `icon.png` elsewhere), so the title bar / taskbar show the real Agent Code Monitoring icon — even an unpackaged `npm run desktop:dev` run no longer shows the generic Electron icon.
 - **Native application menu** — standard `About` / `File` / `Edit` / `View` / `Window` / `Help` menu with `⌘` / `Ctrl` shortcuts. The **File → Open Dashboard** item (`⌘1`) is **macOS-only**: macOS keeps a global menu bar after the window hides, so it can reopen the window — on Windows/Linux the menu is attached to the window and can't fire while it's hidden, so reopen from the tray's **Open Dashboard** instead (which reliably raises the window even when minimized or behind other windows).
 - **Auto-start at login** — toggle **Open at Login** from the tray or app menu. On macOS it registers through the modern `SMAppService` API, so the entry appears under **System Settings → General → Login Items**; on Windows it writes a per-user `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` entry, visible in **Task Manager → Startup**.
 - **Window-close hides, server keeps running** — closing the window just hides it; the server and tray stay up. Click the tray to bring the window back.
 - **Single-instance lock** — double-launching simply focuses the existing window; no second server, no port collision. (Applies on every platform.)
-- **Data survives reinstalls and updates** — the SQLite database and VAPID keys live in the per-user app-data directory **outside the app bundle / install dir** — `~/Library/Application Support/Claude Code Monitor/data/` on macOS, `%APPDATA%\Claude Code Monitor\data\` on Windows. A packaged bundle is read-only, so writing the database inside it would break History Import and event persistence; keeping it in app-data fixes that and means your imported history is untouched when you replace or upgrade the app. (The Windows NSIS uninstaller keeps this data by default.)
+- **Data survives reinstalls and updates** — the SQLite database and VAPID keys live in the per-user app-data directory **outside the app bundle / install dir** — `~/Library/Application Support/Agent Code Monitoring/data/` on macOS, `%APPDATA%\Agent Code Monitoring\data\` on Windows. A packaged bundle is read-only, so writing the database inside it would break History Import and event persistence; keeping it in app-data fixes that and means your imported history is untouched when you replace or upgrade the app. (The Windows NSIS uninstaller keeps this data by default.)
 - **`claude` CLI on PATH** — on macOS the app recovers your login-shell `PATH` at startup, so the **Run Claude** feature works even though a Finder/Dock-launched app would otherwise only inherit launchd's minimal `PATH`. (On Windows the inherited user `PATH` already includes it.)
-- **Logs** — the main process writes to `~/Library/Logs/Claude Code Monitor/desktop.log` (macOS) or `%APPDATA%\Claude Code Monitor\logs\desktop.log` (Windows); reach it from the tray menu's **Show Logs**.
+- **Logs** — the main process writes to `~/Library/Logs/Agent Code Monitoring/desktop.log` (macOS) or `%APPDATA%\Agent Code Monitoring\logs\desktop.log` (Windows); reach it from the tray menu's **Show Logs**.
 
 ### Get it
 
@@ -1448,12 +1448,12 @@ On launch the app:
 
 | Platform | Asset | Notes |
 | --- | --- | --- |
-| macOS (Apple Silicon) | `ClaudeCodeMonitor-<ver>-arm64.dmg` | drag into `/Applications` |
-| macOS (Intel) | `ClaudeCodeMonitor-<ver>-x64.dmg` | drag into `/Applications` |
-| Windows (installer) | `ClaudeCodeMonitor-Setup-<ver>-x64.exe` | per-user install, no admin |
-| Windows (portable) | `ClaudeCodeMonitor-<ver>-x64-portable.exe` | run without installing |
+| macOS (Apple Silicon) | `AgentCodeMonitoring-<ver>-arm64.dmg` | drag into `/Applications` |
+| macOS (Intel) | `AgentCodeMonitoring-<ver>-x64.dmg` | drag into `/Applications` |
+| Windows (installer) | `AgentCodeMonitoring-Setup-<ver>-x64.exe` | per-user install, no admin |
+| Windows (portable) | `AgentCodeMonitoring-<ver>-x64-portable.exe` | run without installing |
 
-Per-commit fresh builds also live as CI artifacts (sign-in required, 14-day retention): `ClaudeCodeMonitor-dmg` from the `🍎 macOS Desktop (DMG)` job and `ClaudeCodeMonitor-win` from the `🪟 Windows Desktop (EXE)` job — useful for testing `master` before the next release tag.
+Per-commit fresh builds also live as CI artifacts (sign-in required, 14-day retention): `AgentCodeMonitoring-dmg` from the `🍎 macOS Desktop (DMG)` job and `AgentCodeMonitoring-win` from the `🪟 Windows Desktop (EXE)` job — useful for testing `master` before the next release tag.
 
 **Option B — build it yourself.** From the repo root:
 
@@ -1461,8 +1461,8 @@ Per-commit fresh builds also live as CI artifacts (sign-in required, 14-day rete
 npm run setup                # install root + client deps, build client, install hooks
 npm run build                # build the React client (client/dist)
 npm run desktop:install      # install Electron + electron-builder into desktop/ (preflights native deps; prints setup help on failure)
-npm run desktop:dmg:arm64    # macOS:   fast single-arch DMG → desktop/release/ClaudeCodeMonitor-<ver>-arm64.dmg
-npm run desktop:win          # Windows: NSIS installer → desktop/release/ClaudeCodeMonitor-Setup-<ver>-x64.exe
+npm run desktop:dmg:arm64    # macOS:   fast single-arch DMG → desktop/release/AgentCodeMonitoring-<ver>-arm64.dmg
+npm run desktop:win          # Windows: NSIS installer → desktop/release/AgentCodeMonitoring-Setup-<ver>-x64.exe
 ```
 
 > [!NOTE]
@@ -1473,11 +1473,11 @@ npm run desktop:win          # Windows: NSIS installer → desktop/release/Claud
 **macOS:**
 
 1. Double-click the `.dmg` to mount it.
-2. Drag **Claude Code Monitor.app** into your `/Applications` folder.
+2. Drag **Agent Code Monitoring.app** into your `/Applications` folder.
 3. The DMG is **ad-hoc signed** by default, so macOS Gatekeeper warns on first launch (*"Apple could not verify…"*). Clear the quarantine attribute:
 
    ```bash
-   xattr -cr "/Applications/Claude Code Monitor.app"
+   xattr -cr "/Applications/Agent Code Monitoring.app"
    ```
 
    Or open **System Settings → Privacy & Security** and click **Open Anyway**.
@@ -1486,7 +1486,7 @@ npm run desktop:win          # Windows: NSIS installer → desktop/release/Claud
 
 **Windows:**
 
-1. Run `ClaudeCodeMonitor-Setup-<ver>-x64.exe`. It installs **per-user** under `%LOCALAPPDATA%\Programs\Claude Code Monitor` (no administrator elevation) and lets you pick the install directory; or run the `*-portable.exe` to launch without installing.
+1. Run `AgentCodeMonitoring-Setup-<ver>-x64.exe`. It installs **per-user** under `%LOCALAPPDATA%\Programs\Agent Code Monitoring` (no administrator elevation) and lets you pick the install directory; or run the `*-portable.exe` to launch without installing.
 2. The installer is **unsigned** by default, so Windows **SmartScreen** may show *"Windows protected your PC"* on first launch — click **More info → Run anyway**.
 3. Launch from the Start menu / desktop shortcut. The notification-area (tray) icon appears and the dashboard window opens.
 
@@ -1535,7 +1535,7 @@ The macOS DMG is **ad-hoc signed** by default so anyone can build a working `.ap
 - **`better-sqlite3`** is the only native module in the dependency tree, and a native module must be compiled against the exact Node ABI it runs on. The `desktop/` workspace ships its **own copy** of `better-sqlite3` rebuilt for Electron's ABI and uses a process-local `require` redirect to point `server/db.js` at it; the repo-root copy stays built for system Node (so `npm run test:server` keeps working).
 - **Building a DMG rebuilds `better-sqlite3` for the target architecture**, which can leave the desktop copy built for the other CPU arch and break `npm run desktop:dev` / `npm run desktop:test` with `ERR_DLOPEN_FAILED`. The desktop `prebuild` step now **auto-heals** the native module for the local machine on the next build, so the dev and smoke-test flows keep working after an arch-specific DMG build. The `prebuild` step also **fails fast with setup help** when the `better-sqlite3` native binary is missing entirely, turning a runtime crash into a copy-pasteable build-time error.
 - The **only change outside `desktop/`** is a behavior-preserving refactor of `server/index.js`: its post-listen bootstrap (update scheduler, `cc-watcher`, orphaned-run reconciliation) was extracted into an exported `startBackgroundServices()` so the embedded server runs exactly what `node server/index.js` runs. The standalone `node server/index.js` path is functionally unchanged; `client/`, `scripts/`, `mcp/`, and `vscode-extension/` are untouched.
-- Two path-filtered desktop CI jobs build, smoke-test, and package the app: **`🍎 macOS Desktop (DMG)`** on `macos-latest` (uploads the `ClaudeCodeMonitor-dmg` artifact — two single-arch DMGs) and **`🪟 Windows Desktop (EXE)`** on `windows-latest` (uploads the `ClaudeCodeMonitor-win` artifact — NSIS installer + portable). On a version-bump push to `master`, the `release` job attaches **both** the macOS DMGs and the Windows `.exe`s to the published `vX.Y.Z` GitHub Release. The Windows icon (`desktop/assets/icon.ico`) is committed to the repo (regenerate it from `icon.png` with `npm run build:win-icon`, PowerShell + .NET, no extra tooling).
+- Two path-filtered desktop CI jobs build, smoke-test, and package the app: **`🍎 macOS Desktop (DMG)`** on `macos-latest` (uploads the `AgentCodeMonitoring-dmg` artifact — two single-arch DMGs) and **`🪟 Windows Desktop (EXE)`** on `windows-latest` (uploads the `AgentCodeMonitoring-win` artifact — NSIS installer + portable). On a version-bump push to `master`, the `release` job attaches **both** the macOS DMGs and the Windows `.exe`s to the published `vX.Y.Z` GitHub Release. The Windows icon (`desktop/assets/icon.ico`) is committed to the repo (regenerate it from `icon.png` with `npm run build:win-icon`, PowerShell + .NET, no extra tooling).
 
 For the full user guide (download, install, Gatekeeper / SmartScreen, tray menu, auto-start) see [`DESKTOP.md`](./DESKTOP.md); for the contributor / architecture reference (process model, boot lifecycle, port discovery, build pipeline — with Mermaid diagrams) see [`desktop/README.md`](./desktop/README.md).
 
@@ -2024,7 +2024,7 @@ agent-code-monitoring/
 |   |   |-- tray.ts              # Menu-bar (tray) icon + context menu
 |   |   |-- menu.ts              # Native application menu (File ▸ Open Dashboard is macOS-only)
 |   |   |-- login-item.ts        # macOS Login Items auto-start toggle (SMAppService)
-|   |   |-- logger.ts            # File logger -> ~/Library/Logs/Claude Code Monitor/desktop.log
+|   |   |-- logger.ts            # File logger -> ~/Library/Logs/Agent Code Monitoring/desktop.log
 |   |   |-- constants.ts         # App name, ports, timeouts, window size
 |   |   +-- preload.ts           # Intentionally empty (zero renderer privilege)
 |   |-- scripts/

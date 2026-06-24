@@ -390,8 +390,8 @@ npm run seed
 
 最快的方式是从 [最新 GitHub Release](https://github.com/billphamhypertek/agent-code-monitoring/releases/latest) **下载预构建的安装包**（每当 `master` 上的 `package.json` 版本号被提升时，CI 都会自动发布一个新的 `vX.Y.Z`）：
 
-- **macOS** —— 下载 `ClaudeCodeMonitor-<version>-arm64.dmg`（Apple Silicon）或 `-x64.dmg`（Intel），并将 **Claude Code Monitor.app** 拖入 `/Applications`。
-- **Windows** —— 下载 `ClaudeCodeMonitor-Setup-<version>-x64.exe`（安装版）或 `ClaudeCodeMonitor-<version>-x64-portable.exe`（免安装版），然后运行它。
+- **macOS** —— 下载 `AgentCodeMonitoring-<version>-arm64.dmg`（Apple Silicon）或 `-x64.dmg`（Intel），并将 **Agent Code Monitoring.app** 拖入 `/Applications`。
+- **Windows** —— 下载 `AgentCodeMonitoring-Setup-<version>-x64.exe`（安装版）或 `AgentCodeMonitoring-<version>-x64-portable.exe`（免安装版），然后运行它。
 
 若希望自行构建：
 
@@ -1241,13 +1241,13 @@ flowchart LR
 Dashboard 现在还提供一个可选的**原生桌面应用**，将现有的服务端 + 客户端打包进单个应用，安装一次即可长期使用：macOS 版为一个 `.app`（以 `.dmg` 分发），Windows 版为一个 `.exe`（一个 NSIS 安装包，外加一个免安装的便携版）。你在浏览器 `localhost:4820` 看到的全部内容都运行在这个窗口里，并在其上叠加了原生操作系统的生命周期能力：托盘图标、应用菜单、开机自启集成，以及一个能干净关闭服务器的「退出」按钮。
 
 <p align="center">
-  <img src="images/macos.png" alt="以原生桌面应用运行的 Claude Code Monitor" width="100%">
+  <img src="images/macos.png" alt="以原生桌面应用运行的 Agent Code Monitoring" width="100%">
   <br>
   <em>🍎🪟 <strong>桌面应用</strong> —— 原生外壳:菜单栏 / 通知区域(托盘)图标、登录项自启动、单实例锁。同一套 Dashboard,运行在真正的操作系统窗口里(图为 macOS)。</em>
 </p>
 
 <p align="center">
-  <img src="images/windows_app.png" alt="以原生 Windows 桌面应用运行的 Claude Code Monitor，显示活动信息流、Windows 原生窗口菜单栏与 Tabby 面板" width="100%">
+  <img src="images/windows_app.png" alt="以原生 Windows 桌面应用运行的 Agent Code Monitoring，显示活动信息流、Windows 原生窗口菜单栏与 Tabby 面板" width="100%">
   <br>
   <em>🪟 同一套 Dashboard 作为原生 Windows 应用运行 —— 通知区域(托盘)图标、原生窗口菜单与登录项自启动。</em>
 </p>
@@ -1303,23 +1303,23 @@ flowchart TD
 
 | 平台 | 资源文件 | 说明 |
 | --- | --- | --- |
-| macOS（Apple Silicon） | `ClaudeCodeMonitor-<ver>-arm64.dmg` | 拖入 `/Applications` |
-| macOS（Intel） | `ClaudeCodeMonitor-<ver>-x64.dmg` | 拖入 `/Applications` |
-| Windows（安装版） | `ClaudeCodeMonitor-Setup-<ver>-x64.exe` | 按用户安装，无需管理员权限 |
-| Windows（便携版） | `ClaudeCodeMonitor-<ver>-x64-portable.exe` | 无需安装即可运行 |
+| macOS（Apple Silicon） | `AgentCodeMonitoring-<ver>-arm64.dmg` | 拖入 `/Applications` |
+| macOS（Intel） | `AgentCodeMonitoring-<ver>-x64.dmg` | 拖入 `/Applications` |
+| Windows（安装版） | `AgentCodeMonitoring-Setup-<ver>-x64.exe` | 按用户安装，无需管理员权限 |
+| Windows（便携版） | `AgentCodeMonitoring-<ver>-x64-portable.exe` | 无需安装即可运行 |
 
-若需要 **每次提交的最新构建**，可改用 CI 产物（需登录，保留 14 天）：来自 `🍎 macOS Desktop (DMG)` 作业的 `ClaudeCodeMonitor-dmg`，以及来自 `🪟 Windows Desktop (EXE)` 作业的 `ClaudeCodeMonitor-win`。
+若需要 **每次提交的最新构建**，可改用 CI 产物（需登录，保留 14 天）：来自 `🍎 macOS Desktop (DMG)` 作业的 `AgentCodeMonitoring-dmg`，以及来自 `🪟 Windows Desktop (EXE)` 作业的 `AgentCodeMonitoring-win`。
 
 安装：
 
 **macOS：**
 
 1. 双击 `.dmg` 将其挂载。
-2. 将 **Claude Code Monitor.app** 拖入你的 `/Applications`（应用程序）文件夹。
+2. 将 **Agent Code Monitoring.app** 拖入你的 `/Applications`（应用程序）文件夹。
 3. DMG 默认采用**临时签名（ad-hoc signed）**，因此首次启动时 macOS Gatekeeper 会发出警告（*"Apple could not verify…"*）。清除隔离属性：
 
    ```bash
-   xattr -cr "/Applications/Claude Code Monitor.app"
+   xattr -cr "/Applications/Agent Code Monitoring.app"
    ```
 
    或者打开 **系统设置 → 隐私与安全性**，点击**仍要打开（Open Anyway）**。
@@ -1328,7 +1328,7 @@ flowchart TD
 
 **Windows：**
 
-1. 运行 `ClaudeCodeMonitor-Setup-<ver>-x64.exe`。它会**按用户**安装到 `%LOCALAPPDATA%\Programs\Claude Code Monitor`（无需管理员提权）并允许你选择安装目录；或运行 `*-portable.exe` 无需安装即可启动。
+1. 运行 `AgentCodeMonitoring-Setup-<ver>-x64.exe`。它会**按用户**安装到 `%LOCALAPPDATA%\Programs\Agent Code Monitoring`（无需管理员提权）并允许你选择安装目录；或运行 `*-portable.exe` 无需安装即可启动。
 2. 安装包**默认未签名**，因此首次启动时 Windows **SmartScreen** 可能弹出「**Windows 已保护你的电脑**」（*"Windows protected your PC"*）—— 点击**更多信息（More info）→ 仍要运行（Run anyway）**。
 3. 从开始菜单 / 桌面快捷方式启动。通知区域（托盘）图标出现，Dashboard 窗口打开。
 
@@ -1357,8 +1357,8 @@ flowchart TD
 npm run setup                # 安装根目录 + 客户端依赖、构建客户端、安装 Hook
 npm run build                # 构建 React 客户端（client/dist）
 npm run desktop:install      # 在 desktop/ 中安装 Electron + electron-builder（预检原生依赖；失败时打印安装帮助）
-npm run desktop:dmg:arm64    # macOS：  快速的单架构 DMG → desktop/release/ClaudeCodeMonitor-<ver>-arm64.dmg
-npm run desktop:win          # Windows：NSIS 安装包 → desktop/release/ClaudeCodeMonitor-Setup-<ver>-x64.exe
+npm run desktop:dmg:arm64    # macOS：  快速的单架构 DMG → desktop/release/AgentCodeMonitoring-<ver>-arm64.dmg
+npm run desktop:win          # Windows：NSIS 安装包 → desktop/release/AgentCodeMonitoring-Setup-<ver>-x64.exe
 ```
 
 > [!NOTE]
@@ -1391,10 +1391,10 @@ npx electron-builder install-app-deps
 
 ```bash
 # 最简单：在打开前去掉隔离属性。
-xattr -cr ~/Downloads/ClaudeCodeMonitor-*.dmg
+xattr -cr ~/Downloads/AgentCodeMonitoring-*.dmg
 
 # 或者在拖入「应用程序」之后去掉应用的隔离属性：
-xattr -cr "/Applications/Claude Code Monitor.app"
+xattr -cr "/Applications/Agent Code Monitoring.app"
 ```
 
 也可以打开  → *系统设置 → 隐私与安全性*，滚动到被拦截的项目，点击*仍要打开*。
@@ -1433,14 +1433,14 @@ flowchart TD
 ### 生命周期语义
 
 - **托盘图标** —— 常驻状态面板（macOS 菜单栏 / Windows 通知区域）。左键单击切换 Dashboard 窗口的显示/隐藏；右键单击打开上下文菜单，包含**打开 Dashboard**、**在浏览器中打开**、**重启服务器**、**查看日志**、**开机自启**（开关）与**退出**。macOS 使用着色的模板图标；Windows 使用彩色的 `icon.ico`（纯黑模板图标在深色任务栏上会看不见）。
-- **窗口与任务栏图标** —— `BrowserWindow` 已绑定彩色的应用 Logo（Windows 上为 `icon.ico`，其他平台为 `icon.png`），因此标题栏 / 任务栏显示的是真正的 Claude Code Monitor 图标 —— 即便是未打包的 `npm run desktop:dev` 运行，也不再显示通用的 Electron 图标。
+- **窗口与任务栏图标** —— `BrowserWindow` 已绑定彩色的应用 Logo（Windows 上为 `icon.ico`，其他平台为 `icon.png`），因此标题栏 / 任务栏显示的是真正的 Agent Code Monitoring 图标 —— 即便是未打包的 `npm run desktop:dev` 运行，也不再显示通用的 Electron 图标。
 - **原生应用菜单** —— 标准的 `About` / `File` / `Edit` / `View` / `Window` / `Help` 菜单，带 `⌘` / `Ctrl` 快捷键。其中 **File → Open Dashboard**（`⌘1`）项**仅在 macOS 上可用**：macOS 在窗口隐藏后仍保留全局菜单栏，因此该项能重新打开窗口 —— 而在 Windows/Linux 上，菜单是依附于窗口的，窗口隐藏时菜单快捷键无法触发，所以请改从托盘的 **Open Dashboard** 重新打开（即便窗口已最小化或被其他窗口遮挡，它也能可靠地将窗口**调到前台**）。
 - **关闭窗口只是隐藏它。** 服务器继续运行，托盘图标保留。点击托盘即可重新调出窗口。
 - **退出（⌘Q / Ctrl+Q，或托盘 → 退出）** 会优雅关闭嵌入式服务器、干净关闭 SQLite（完成 WAL checkpoint），然后退出。
 - **开机自启开关：** 在托盘菜单（或应用菜单）中切换*开机自启*。在 macOS 上，它通过 `SMAppService` / `ServiceManagement` 框架注册 —— 你会在  → *系统设置 → 通用 → 登录项* 中看到该条目；在 Windows 上，它写入一个按用户的 `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` 项，可在**任务管理器 → 启动**中看到。当应用在登录时被启动时，它以**仅托盘模式**启动，不会有窗口突然弹到用户面前。
 - **单实例锁：** 重复启动只会聚焦已有窗口，不会产生第二个服务器，也不会发生端口冲突。（适用于所有平台。）
-- **「在浏览器中打开」「重启服务器」「查看日志」** 均可从托盘菜单直接触发。日志位于 `~/Library/Logs/Claude Code Monitor/desktop.log`（macOS）或 `%APPDATA%\Claude Code Monitor\logs\desktop.log`（Windows）（菜单中的*查看日志*会打开该位置）。
-- **你的数据**（SQLite 数据库与 VAPID 密钥）保存在按用户的应用数据目录中，位于应用包 / 安装目录**之外** —— macOS 为 `~/Library/Application Support/Claude Code Monitor/data/`，Windows 为 `%APPDATA%\Claude Code Monitor\data\`，因此能够**在应用重装与更新后继续保留**。已打包的应用包是只读的，把数据库写在其中会导致「历史导入」（History Import）与事件持久化失败；保存在应用数据目录修复了这一点，并意味着你导入的历史在替换或升级应用时不会受影响。（Windows 的 NSIS 卸载程序默认会保留这些数据。）
+- **「在浏览器中打开」「重启服务器」「查看日志」** 均可从托盘菜单直接触发。日志位于 `~/Library/Logs/Agent Code Monitoring/desktop.log`（macOS）或 `%APPDATA%\Agent Code Monitoring\logs\desktop.log`（Windows）（菜单中的*查看日志*会打开该位置）。
+- **你的数据**（SQLite 数据库与 VAPID 密钥）保存在按用户的应用数据目录中，位于应用包 / 安装目录**之外** —— macOS 为 `~/Library/Application Support/Agent Code Monitoring/data/`，Windows 为 `%APPDATA%\Agent Code Monitoring\data\`，因此能够**在应用重装与更新后继续保留**。已打包的应用包是只读的，把数据库写在其中会导致「历史导入」（History Import）与事件持久化失败；保存在应用数据目录修复了这一点，并意味着你导入的历史在替换或升级应用时不会受影响。（Windows 的 NSIS 卸载程序默认会保留这些数据。）
 - **`claude` CLI**：在 macOS 上，应用在启动时会恢复你登录 Shell 的 `PATH` —— 因此即便从 Finder/Dock 启动的 macOS 应用通常只会继承 launchd 提供的极简 `PATH`，「运行 Claude」（Run Claude）功能依然能找到并启动 `claude` CLI。（在 Windows 上，所继承的用户 `PATH` 已包含它。）
 
 ### 构建命令
@@ -1463,7 +1463,7 @@ flowchart TD
 > **DMG 在 macOS 上构建，Windows `.exe` 在 Windows 上构建** —— electron-builder 针对宿主操作系统打包。macOS 的通用版 `npm run desktop:dmg` 构建**有意设计得很慢**（它会把应用构建两次，再用 `@electron/universal` 合并）；为自己的 Mac 构建时请使用单架构的 `desktop:dmg:arm64` / `desktop:dmg:x64`。在 Windows 上，`npm run desktop:install` 会把 `better-sqlite3` 作为 Electron 预编译二进制拉取，因此常见情况下无需 Visual Studio C++ 工具链。
 >
 > - 为**自己的 Mac** 构建 → 使用 `desktop:dmg:arm64`（Apple Silicon）或 `desktop:dmg:x64`（Intel）。单架构、无合并，大约 1 分钟即可完成。
-> - 为**所有人构建发布产物** → 使用通用版 `desktop:dmg`，并预期它会耗时较久。CI 已经会构建 macOS DMG 与 Windows `.exe` 并分别上传为 `ClaudeCodeMonitor-dmg` 与 `ClaudeCodeMonitor-win` 产物，因此你很少需要在本地构建它们。
+> - 为**所有人构建发布产物** → 使用通用版 `desktop:dmg`，并预期它会耗时较久。CI 已经会构建 macOS DMG 与 Windows `.exe` 并分别上传为 `AgentCodeMonitoring-dmg` 与 `AgentCodeMonitoring-win` 产物，因此你很少需要在本地构建它们。
 > - 无论哪种方式，macOS DMG 体积约为 **80 MB / 安装后约 250 MB**，Windows 安装包体积相当 —— 这是标准的 Electron 体积成本。
 
 ### 原生模块与签名
@@ -1475,16 +1475,16 @@ flowchart TD
 
 ### 持续集成
 
-`.github/workflows/ci.yml` 中有两个经过**路径过滤**的桌面作业（一个 `changes` 作业用 `dorny/paths-filter` 检测 `desktop/**` 的改动；这些作业也会在任何 `push` 时、或 PR 带有 `desktop` 标签时运行）：运行在 `macos-latest` 上的 `🍎 macOS Desktop (DMG)` 作业会构建**通用版 DMG**（对偶发的 `hdiutil detach` 失败会重试）并上传为 `ClaudeCodeMonitor-dmg` 产物（两个单架构 DMG）；运行在 `windows-latest` 上的 `🪟 Windows Desktop (EXE)` 作业会构建并上传为 `ClaudeCodeMonitor-win` 产物（NSIS 安装包 + 便携版）。在向 `master` 推送版本号提升时，`release` 作业会把 macOS DMG 与 Windows `.exe` **都**附加到所发布的 `vX.Y.Z` GitHub Release。Windows 图标（`desktop/assets/icon.ico`）已提交到仓库中（可用 `npm run build:win-icon` 从 `icon.png` 重新生成，基于 PowerShell + .NET，无需额外工具）。
+`.github/workflows/ci.yml` 中有两个经过**路径过滤**的桌面作业（一个 `changes` 作业用 `dorny/paths-filter` 检测 `desktop/**` 的改动；这些作业也会在任何 `push` 时、或 PR 带有 `desktop` 标签时运行）：运行在 `macos-latest` 上的 `🍎 macOS Desktop (DMG)` 作业会构建**通用版 DMG**（对偶发的 `hdiutil detach` 失败会重试）并上传为 `AgentCodeMonitoring-dmg` 产物（两个单架构 DMG）；运行在 `windows-latest` 上的 `🪟 Windows Desktop (EXE)` 作业会构建并上传为 `AgentCodeMonitoring-win` 产物（NSIS 安装包 + 便携版）。在向 `master` 推送版本号提升时，`release` 作业会把 macOS DMG 与 Windows `.exe` **都**附加到所发布的 `vX.Y.Z` GitHub Release。Windows 图标（`desktop/assets/icon.ico`）已提交到仓库中（可用 `npm run build:win-icon` 从 `icon.png` 重新生成，基于 PowerShell + .NET，无需额外工具）。
 
 ### 桌面应用故障排查
 
 | 现象 | 原因 / 解决方法 |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| 首次启动时 macOS 提示「Apple 无法验证…」 | DMG 默认临时签名。运行 `xattr -cr ~/Downloads/ClaudeCodeMonitor-*.dmg`（或对已安装的 `.app` 执行），或在*系统设置 → 隐私与安全性*中点击*仍要打开* |
+| 首次启动时 macOS 提示「Apple 无法验证…」 | DMG 默认临时签名。运行 `xattr -cr ~/Downloads/AgentCodeMonitoring-*.dmg`（或对已安装的 `.app` 执行），或在*系统设置 → 隐私与安全性*中点击*仍要打开* |
 | 首次启动时 Windows SmartScreen 提示「Windows 已保护你的电脑」 | 安装包默认未签名。点击**更多信息 → 仍要运行**即可启动 |
 | 「运行 Claude」提示 `claude` 不在 PATH 上 | （macOS）从 Finder/Dock 启动的应用只会继承 launchd 的极简 `PATH`，而非你的 Shell `PATH`。已修复 —— 应用在启动时会恢复登录 Shell 的 `PATH`。若问题仍存在，请确认 `claude` 是真正的可执行文件（而非 Shell 别名或函数），并位于你的 Shell `PATH` 上。在 Windows 上，所继承的用户 `PATH` 已包含它 |
-| 更新应用后导入的历史 / 会话消失 | 早期构建把数据库存放在（可被替换的）应用包内部。已修复 —— 数据现保存在 `~/Library/Application Support/Claude Code Monitor/data/`（macOS）或 `%APPDATA%\Claude Code Monitor\data\`（Windows），可在重装与更新后保留。从修复前的旧版本升级后，请再执行一次 **Import History → Rescan** |
+| 更新应用后导入的历史 / 会话消失 | 早期构建把数据库存放在（可被替换的）应用包内部。已修复 —— 数据现保存在 `~/Library/Application Support/Agent Code Monitoring/data/`（macOS）或 `%APPDATA%\Agent Code Monitoring\data\`（Windows），可在重装与更新后保留。从修复前的旧版本升级后，请再执行一次 **Import History → Rescan** |
 | `desktop:dev` / `desktop:test` 报 `ERR_DLOPEN_FAILED` | 之前的 DMG 构建留下了为另一 CPU 架构编译的 `better-sqlite3`。预构建步骤会在下次构建时自动修复；如有需要可运行 `npm run desktop:install` |
 
 更多细节请参阅面向用户的 [`DESKTOP.md`](./DESKTOP.md)，以及面向贡献者 / 架构的 [`desktop/README.md`](./desktop/README.md)。

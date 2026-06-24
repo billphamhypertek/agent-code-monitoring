@@ -1,4 +1,4 @@
-# Claude Code Monitor — Desktop App (macOS & Windows)
+# Agent Code Monitoring — Desktop App (macOS & Windows)
 
 The dashboard ships with an optional **native desktop app** (built with Electron 35) that wraps the existing server + client into a single application you install once and forget — a macOS `.app` (shipped as a `.dmg`) and a Windows `.exe` (an NSIS installer plus a no-install portable build). Everything you see in the browser at `localhost:4820` lives inside this window, with native OS lifecycle on top: a menu-bar / notification-area (tray) icon, a native application menu, auto-start at login, and a single quit button that cleans up the server.
 
@@ -25,17 +25,17 @@ The two coexist — install whichever fits your workflow.
 
    | Platform | Asset | Notes |
    |---|---|---|
-   | macOS (Apple Silicon) | `ClaudeCodeMonitor-<ver>-arm64.dmg` | drag into `/Applications` |
-   | macOS (Intel) | `ClaudeCodeMonitor-<ver>-x64.dmg` | drag into `/Applications` |
-   | Windows (installer) | `ClaudeCodeMonitor-Setup-<ver>-x64.exe` | per-user install, no admin |
-   | Windows (portable) | `ClaudeCodeMonitor-<ver>-x64-portable.exe` | run without installing |
+   | macOS (Apple Silicon) | `AgentCodeMonitoring-<ver>-arm64.dmg` | drag into `/Applications` |
+   | macOS (Intel) | `AgentCodeMonitoring-<ver>-x64.dmg` | drag into `/Applications` |
+   | Windows (installer) | `AgentCodeMonitoring-Setup-<ver>-x64.exe` | per-user install, no admin |
+   | Windows (portable) | `AgentCodeMonitoring-<ver>-x64-portable.exe` | run without installing |
 
-2. Want a **per-commit build** instead of waiting for a release? Every green CI run uploads a workflow artifact (sign-in required, 14-day retention) — `ClaudeCodeMonitor-dmg` from the `🍎 macOS Desktop (DMG)` job and `ClaudeCodeMonitor-win` from the `🪟 Windows Desktop (EXE)` job:
+2. Want a **per-commit build** instead of waiting for a release? Every green CI run uploads a workflow artifact (sign-in required, 14-day retention) — `AgentCodeMonitoring-dmg` from the `🍎 macOS Desktop (DMG)` job and `AgentCodeMonitoring-win` from the `🪟 Windows Desktop (EXE)` job:
    ```bash
-   gh run download <run-id> -R billphamhypertek/agent-code-monitoring -n ClaudeCodeMonitor-dmg   # or ClaudeCodeMonitor-win
+   gh run download <run-id> -R billphamhypertek/agent-code-monitoring -n AgentCodeMonitoring-dmg   # or AgentCodeMonitoring-win
    ```
-3. **macOS:** double-click the DMG → drag `Claude Code Monitor.app` into your `Applications` folder. Open it; macOS may show a Gatekeeper warning the first time — see [Gatekeeper & SmartScreen](#gatekeeper--smartscreen-first-launch) below.
-4. **Windows:** run `ClaudeCodeMonitor-Setup-<ver>-x64.exe` (per-user, no admin) and follow the wizard, or just run the `*-portable.exe` to launch without installing. Windows **SmartScreen** may show *"Windows protected your PC"* the first time — see [Gatekeeper & SmartScreen](#gatekeeper--smartscreen-first-launch) below.
+3. **macOS:** double-click the DMG → drag `Agent Code Monitoring.app` into your `Applications` folder. Open it; macOS may show a Gatekeeper warning the first time — see [Gatekeeper & SmartScreen](#gatekeeper--smartscreen-first-launch) below.
+4. **Windows:** run `AgentCodeMonitoring-Setup-<ver>-x64.exe` (per-user, no admin) and follow the wizard, or just run the `*-portable.exe` to launch without installing. Windows **SmartScreen** may show *"Windows protected your PC"* the first time — see [Gatekeeper & SmartScreen](#gatekeeper--smartscreen-first-launch) below.
 
 **Option B — build locally:**
 
@@ -51,15 +51,15 @@ npm run desktop:dmg:x64      # Intel only — FAST
 npm run desktop:dmg          # universal (x64 + arm64) — SLOW; for distributing one DMG to everyone
 
 # Build for Windows (run ON Windows) — pick one:
-npm run desktop:win          # NSIS installer → desktop/release/ClaudeCodeMonitor-Setup-<ver>-x64.exe
-npm run desktop:win:portable # no-install portable → desktop/release/ClaudeCodeMonitor-<ver>-x64-portable.exe
+npm run desktop:win          # NSIS installer → desktop/release/AgentCodeMonitoring-Setup-<ver>-x64.exe
+npm run desktop:win:portable # no-install portable → desktop/release/AgentCodeMonitoring-<ver>-x64-portable.exe
 
 # electron-builder packages for the HOST OS — you cannot build a Windows .exe
 # on macOS or a macOS .dmg on Windows.
 
 # Open the macOS DMG you just built. Each desktop:dmg* build wipes release/ first
 # and emits exactly one DMG, so match the suffix to the build above.
-open desktop/release/ClaudeCodeMonitor-*-arm64.dmg   # …-x64.dmg / …-universal.dmg for the others
+open desktop/release/AgentCodeMonitoring-*-arm64.dmg   # …-x64.dmg / …-universal.dmg for the others
 ```
 
 > **The universal `desktop:dmg` build is intentionally slow.** It builds the app
@@ -68,7 +68,7 @@ open desktop/release/ClaudeCodeMonitor-*-arm64.dmg   # …-x64.dmg / …-univers
 > `packaging arch=universal` step can run for several minutes. For running on
 > **your own Mac**, use the arch-specific command (`desktop:dmg:arm64` /
 > `desktop:dmg:x64`) — it finishes in about a minute. CI builds the universal
-> DMG for you and uploads it as the `ClaudeCodeMonitor-dmg` artifact, so you
+> DMG for you and uploads it as the `AgentCodeMonitoring-dmg` artifact, so you
 > rarely need to build it locally.
 
 ## What happens when you launch the app
@@ -83,13 +83,13 @@ open desktop/release/ClaudeCodeMonitor-*-arm64.dmg   # …-x64.dmg / …-univers
 ## Lifecycle semantics
 
 - **Closing the window hides it.** The server keeps running, the tray icon stays, and (on macOS) the **dock icon stays too** — clicking either re-opens the window. Independent signals that the app is still alive.
-- **Quitting** (⌘Q / Ctrl+Q, *Quit* in the application menu, or *Quit* in the tray menu) pops a confirmation dialog — *"Quit Claude Code Monitor? Press ⌘Q again to skip this prompt and quit immediately."* Press **Quit** in the dialog, or **press ⌘Q / Ctrl+Q a second time** to bypass the prompt. Either way the SQLite handle is checkpointed cleanly before the process exits.
+- **Quitting** (⌘Q / Ctrl+Q, *Quit* in the application menu, or *Quit* in the tray menu) pops a confirmation dialog — *"Quit Agent Code Monitoring? Press ⌘Q again to skip this prompt and quit immediately."* Press **Quit** in the dialog, or **press ⌘Q / Ctrl+Q a second time** to bypass the prompt. Either way the SQLite handle is checkpointed cleanly before the process exits.
 - **Tray** — the macOS menu bar / Windows notification area. macOS uses a black template glyph the OS tints for light/dark menu bars; Windows uses the colored `icon.ico`, because a template glyph would vanish on the dark taskbar. A single click (left or right) opens the dropdown, which shows a **live status snapshot** pulled straight from the embedded SQLite handle each time it opens: server port, active sessions, working agents, and events today. Snapshot rows are clickable — they open the dashboard. The tray's *Open Dashboard* reliably **raises** the window even when it is minimized or behind other windows. (The application menu's *File ▸ Open Dashboard* / ⌘1 is **macOS-only** — on Windows/Linux a window-attached menu accelerator can't reopen a hidden window, so reopening is the tray's job there.)
 - **Window / taskbar icon** — the `BrowserWindow` sets its `icon` to the colored app logo (`icon.ico` on Windows, `icon.png` elsewhere — the same logo as the macOS Dock, rendered from `assets/icon.svg`), so an unpackaged `desktop:dev` run shows the real app logo in the title bar / taskbar instead of the generic Electron icon. The macOS dev Dock icon is set too; packaged apps already get theirs from the bundle `.icns`/`.exe`.
 - **Open-at-login toggle:** flip *Open at Login* in the tray menu (or the app menu). Both platforms go through Electron's first-party `app.*LoginItemSettings` API — no third-party deps. On **macOS** it registers via the `SMAppService` API, so the entry appears under  → *System Settings → General → Login Items*. On **Windows** it writes a per-user `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` entry, visible under *Task Manager → Startup*; a login-triggered launch is detected via a `--acm-hidden` arg (Windows has no `wasOpenedAtLogin`). On Linux the toggle is a no-op (unsupported).
 - **Single-instance:** double-launching just focuses the existing window. No second server, no port collision. (Applies on every platform.)
-- **Logs** live at `~/Library/Logs/Claude Code Monitor/desktop.log` on macOS and `%APPDATA%\Claude Code Monitor\logs\desktop.log` on Windows (use *Show Logs* in the tray menu to open the folder).
-- **Your data** (the SQLite database and VAPID keys) lives outside the app bundle / install dir, so it **survives app reinstalls and updates** — `~/Library/Application Support/Claude Code Monitor/data/` on macOS, `%APPDATA%\Claude Code Monitor\data\` on Windows. The Windows NSIS uninstaller **keeps this data by default** (`deleteAppDataOnUninstall: false`), mirroring how dragging the `.app` to the Trash on macOS never touches your data.
+- **Logs** live at `~/Library/Logs/Agent Code Monitoring/desktop.log` on macOS and `%APPDATA%\Agent Code Monitoring\logs\desktop.log` on Windows (use *Show Logs* in the tray menu to open the folder).
+- **Your data** (the SQLite database and VAPID keys) lives outside the app bundle / install dir, so it **survives app reinstalls and updates** — `~/Library/Application Support/Agent Code Monitoring/data/` on macOS, `%APPDATA%\Agent Code Monitoring\data\` on Windows. The Windows NSIS uninstaller **keeps this data by default** (`deleteAppDataOnUninstall: false`), mirroring how dragging the `.app` to the Trash on macOS never touches your data.
 - **The `claude` CLI on PATH.** On **macOS** the app resolves it using your login-shell `PATH`, recovered at startup — so "Run Claude" works even though a Finder/Dock-launched app would otherwise only inherit a minimal `PATH`. On **Windows** the inherited user `PATH` already includes it, so no recovery is needed.
 - **Notifications** (including the in-dashboard *Send test notification* button) are delivered as **native OS toasts** on both platforms when running inside the app — the embedded server calls Electron's `Notification` API directly. On Windows the app sets an `AppUserModelId` (`com.billphamhypertek.acm.desktop`, matching the electron-builder `appId`) so toasts attribute to the app and its taskbar windows group correctly. Web Push doesn't work reliably inside Electron (Chromium-in-Electron ships without Firebase Cloud Messaging credentials, so `pushManager.subscribe` returns endpoints nothing can deliver to), and this path bypasses it entirely. The web dashboard at `npm start` continues to use Web Push as before.
 - **Coexists with the web dashboard.** You can run the desktop app and `npm run dev` (or `npm start`) at the same time. Each server writes its `{port, pid, startedAt}` entry to a shared discovery file at `~/.claude/.agent-code-monitoring.json`, and the Claude Code hook handler **fan-outs each event to every live entry**. Both UIs stay real-time; the two SQLite databases (the per-user data dir's `dashboard.db` and the repo's `data/dashboard.db`) each record the same events independently.
@@ -142,7 +142,7 @@ Two ways past it:
 
 ```bash
 # Easiest: strip the quarantine attribute from the DMG before opening.
-xattr -cr ~/Downloads/ClaudeCodeMonitor-*.dmg
+xattr -cr ~/Downloads/AgentCodeMonitoring-*.dmg
 ```
 
 Or open  → *System Settings → Privacy & Security*, scroll to the blocked DMG, click *Open Anyway*.
@@ -228,11 +228,11 @@ The smoke test does not exercise the BrowserWindow (no display on headless CI). 
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| "Apple could not verify…" on first launch (macOS) | Unnotarized DMG | `xattr -cr ~/Downloads/ClaudeCodeMonitor-*.dmg` |
+| "Apple could not verify…" on first launch (macOS) | Unnotarized DMG | `xattr -cr ~/Downloads/AgentCodeMonitoring-*.dmg` |
 | "Windows protected your PC" on first launch (Windows) | The `.exe` is unsigned by default (SmartScreen) | Click **More info → Run anyway**. To remove the prompt for everyone, the maintainer can enable Authenticode signing via `CSC_LINK` + `CSC_KEY_PASSWORD` |
-| macOS prompts to install Rosetta when opening the app | You installed the **x64** build on an Apple Silicon Mac | Check your arch with `uname -m` (`arm64` → Apple Silicon, build with `desktop:dmg:arm64`). Each `desktop:dmg*` build now wipes `release/` and emits a single DMG whose mounted-volume title states the architecture — e.g. *Claude Code Monitor (Apple Silicon)* — so there is no ambiguous second window to drag from. If stale DMGs from an older build linger, clear them with `rm -rf desktop/release` and rebuild |
-| Window shows but content is blank (macOS) | Server didn't boot — check `~/Library/Logs/Claude Code Monitor/desktop.log` | Restart from tray → *Restart Server* |
-| Window shows but content is blank (Windows) | Server didn't boot — check `%APPDATA%\Claude Code Monitor\logs\desktop.log` | Restart from tray → *Restart Server* |
+| macOS prompts to install Rosetta when opening the app | You installed the **x64** build on an Apple Silicon Mac | Check your arch with `uname -m` (`arm64` → Apple Silicon, build with `desktop:dmg:arm64`). Each `desktop:dmg*` build now wipes `release/` and emits a single DMG whose mounted-volume title states the architecture — e.g. *Agent Code Monitoring (Apple Silicon)* — so there is no ambiguous second window to drag from. If stale DMGs from an older build linger, clear them with `rm -rf desktop/release` and rebuild |
+| Window shows but content is blank (macOS) | Server didn't boot — check `~/Library/Logs/Agent Code Monitoring/desktop.log` | Restart from tray → *Restart Server* |
+| Window shows but content is blank (Windows) | Server didn't boot — check `%APPDATA%\Agent Code Monitoring\logs\desktop.log` | Restart from tray → *Restart Server* |
 | Tray icon missing (macOS) | The OS hides tray icons when the menu bar is full | Move other menu-bar items aside, or look in the overflow chevron |
 | Tray icon missing (Windows) | Windows tucked it into the notification-area overflow | Click the **^** overflow chevron in the taskbar; drag the icon out to keep it pinned |
 | App didn't auto-start at login (macOS) | Login Items entry got revoked by macOS | Toggle *Open at Login* off and on again from the tray menu |
@@ -245,5 +245,5 @@ The smoke test does not exercise the BrowserWindow (no display on headless CI). 
 | Build fails: `entry file out/main.js does not exist` | `electron-builder` was run without compiling TypeScript first | Build via `npm run desktop:dmg*` (chains the build); don't invoke `electron-builder` bare |
 | Signing fails with `Application … could not be found` | A code-signing certificate in your keychain was auto-discovered | Fixed — the `package` script sets `CSC_IDENTITY_AUTO_DISCOVERY=false`; build via `npm run desktop:dmg*` |
 | "Run Claude" reports the `claude` CLI isn't on your PATH | A Finder/Dock-launched app inherits launchd's minimal PATH, not your shell PATH | Fixed — the app recovers your login-shell PATH at startup. If it persists, ensure `claude` is a real executable (not a shell alias/function) and on your shell PATH |
-| Imported history / sessions vanished after updating the app | Older builds stored the database inside the (replaceable) app bundle | Fixed — data now lives in `~/Library/Application Support/Claude Code Monitor/data/` and survives reinstalls. After upgrading from a pre-fix build, re-run **Import History → Rescan** once |
+| Imported history / sessions vanished after updating the app | Older builds stored the database inside the (replaceable) app bundle | Fixed — data now lives in `~/Library/Application Support/Agent Code Monitoring/data/` and survives reinstalls. After upgrading from a pre-fix build, re-run **Import History → Rescan** once |
 | Signing fails: `Application … could not be found` after retries | A keychain code-signing certificate was auto-discovered | Fixed — the `package` script sets `CSC_IDENTITY_AUTO_DISCOVERY=false`; build via `npm run desktop:dmg*` |

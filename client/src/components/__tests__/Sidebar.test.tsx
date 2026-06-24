@@ -26,7 +26,7 @@ describe("Sidebar", () => {
 
   it("should render the subtitle", () => {
     renderSidebar(true);
-    expect(screen.getByText("Claude Code Monitor")).toBeInTheDocument();
+    expect(screen.getByText("Claude Code activity monitor")).toBeInTheDocument();
   });
 
   it("should render all navigation links", () => {

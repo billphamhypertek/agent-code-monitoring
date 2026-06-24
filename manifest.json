@@ -1,7 +1,7 @@
 {
   "id": "agent-code-monitoring-landing",
   "name": "Agent Code Monitoring",
-  "short_name": "CC Monitor",
+  "short_name": "Agent Monitor",
   "description": "Local-first monitoring dashboard for Claude Code sessions.",
   "author": "Binh Pham",
   "start_url": ".",

@@ -3095,7 +3095,7 @@
           </div>
           <div class="showcase-card" data-cat="system" data-title="Desktop App (macOS &amp; Windows)">
             <div class="showcase-img">
-              <img src="images/macos.png" alt="Claude Code Monitor running as a native desktop app on macOS and Windows" loading="lazy" />
+              <img src="images/macos.png" alt="Agent Code Monitoring running as a native desktop app on macOS and Windows" loading="lazy" />
               <span class="showcase-expand-icon">⤢</span>
               <div class="showcase-overlay">
                 <h4>Desktop App (macOS &amp; Windows)</h4>
@@ -3460,12 +3460,12 @@
             <p>
               Open the <a href="https://github.com/billphamhypertek/agent-code-monitoring/releases/latest">latest
               release</a>. <strong>macOS:</strong> grab
-              <code>ClaudeCodeMonitor-&lt;version&gt;-arm64.dmg</code> for Apple Silicon (M1 / M2 /
+              <code>AgentCodeMonitoring-&lt;version&gt;-arm64.dmg</code> for Apple Silicon (M1 / M2 /
               M3 / M4) or <code>-x64.dmg</code> for Intel Macs (<em>Apple menu &rarr; About This
               Mac</em> - anything labelled "Apple" silicon is <code>arm64</code>).
               <strong>Windows:</strong> grab
-              <code>ClaudeCodeMonitor-Setup-&lt;version&gt;-x64.exe</code> (NSIS installer) or
-              <code>ClaudeCodeMonitor-&lt;version&gt;-x64-portable.exe</code> (no-install portable).
+              <code>AgentCodeMonitoring-Setup-&lt;version&gt;-x64.exe</code> (NSIS installer) or
+              <code>AgentCodeMonitoring-&lt;version&gt;-x64-portable.exe</code> (no-install portable).
             </p>
           </div>
           <div class="how-step">
@@ -3473,7 +3473,7 @@
             <h4>Install or run it</h4>
             <p>
               <strong>macOS:</strong> double-click the DMG to mount it, then drag
-              <strong>Claude Code Monitor.app</strong> onto the <code>Applications</code> shortcut
+              <strong>Agent Code Monitoring.app</strong> onto the <code>Applications</code> shortcut
               beside it and eject the DMG once the copy is done. <strong>Windows:</strong> run the
               <code>*-Setup-*.exe</code> - it installs <strong>per-user</strong> (no administrator
               elevation) and adds Start-menu / desktop shortcuts - or just run the
@@ -3486,7 +3486,7 @@
             <p>
               <strong>macOS:</strong> the build is ad-hoc signed (not notarized), so Gatekeeper
               shows <em>"Apple could not verify…"</em> - clear the quarantine once in Terminal with
-              <code>xattr -cr "/Applications/Claude Code Monitor.app"</code> (or
+              <code>xattr -cr "/Applications/Agent Code Monitoring.app"</code> (or
               <em>System Settings &rarr; Privacy &amp; Security &rarr; Open Anyway</em>).
               <strong>Windows:</strong> the build is unsigned, so SmartScreen may show
               <em>"Windows protected your PC"</em> - click <strong>More info &rarr; Run anyway</strong>.
@@ -3497,7 +3497,7 @@
             <div class="how-step-num">04</div>
             <h4>Launch &amp; toggle auto-start</h4>
             <p>
-              Open <strong>Claude Code Monitor</strong> (Applications / Spotlight on macOS, the
+              Open <strong>Agent Code Monitoring</strong> (Applications / Spotlight on macOS, the
               Start menu / desktop shortcut on Windows). The tray icon appears within a second;
               click it &rarr; <em>Open at Login</em> and the app will start at every login from now
               on - managed through <em>System Settings &rarr; General &rarr; Login Items</em> on
@@ -3513,11 +3513,11 @@
               <strong>Download a pre-built installer - no build required.</strong> Hit the
               button below to land on the <strong>latest GitHub Release</strong>. <strong>macOS:</strong>
               grab the matching arch DMG -
-              <code>ClaudeCodeMonitor-&lt;version&gt;-arm64.dmg</code> for Apple Silicon
+              <code>AgentCodeMonitoring-&lt;version&gt;-arm64.dmg</code> for Apple Silicon
               or <code>-x64.dmg</code> for Intel - and drag the app into
               <code>/Applications</code>. <strong>Windows:</strong> grab
-              <code>ClaudeCodeMonitor-Setup-&lt;version&gt;-x64.exe</code> (NSIS installer) or
-              <code>ClaudeCodeMonitor-&lt;version&gt;-x64-portable.exe</code> (no-install) and run
+              <code>AgentCodeMonitoring-Setup-&lt;version&gt;-x64.exe</code> (NSIS installer) or
+              <code>AgentCodeMonitoring-&lt;version&gt;-x64-portable.exe</code> (no-install) and run
               it. The link always redirects to the current release because CI publishes a new
               <code>vX.Y.Z</code> automatically every time the version in
               <code>package.json</code> is bumped on <code>master</code>, attaching <strong>both</strong>
@@ -3527,8 +3527,8 @@
             <p>
               Want a <strong>per-commit build from CI</strong> instead of waiting for a
               release? The <strong>🍎 macOS Desktop (DMG)</strong> job uploads a
-              <code>ClaudeCodeMonitor-dmg</code> artifact and the <strong>🪟 Windows Desktop
-              (EXE)</strong> job uploads a <code>ClaudeCodeMonitor-win</code> artifact on every
+              <code>AgentCodeMonitoring-dmg</code> artifact and the <strong>🪟 Windows Desktop
+              (EXE)</strong> job uploads a <code>AgentCodeMonitoring-win</code> artifact on every
               green run - useful for testing master before it's tagged. Or
               <strong>build it yourself</strong> on the host OS: a single-arch macOS build
               (<code>desktop:dmg:arm64</code> or <code>desktop:dmg:x64</code>) finishes
@@ -3621,7 +3621,7 @@
 
 <span class="comment"># macOS: open the DMG, drag the app to Applications, then</span>
 <span class="comment"># clear the Gatekeeper quarantine on first launch:</span>
-<span class="prompt">$</span>xattr -cr <span class="str">"/Applications/Claude Code Monitor.app"</span>
+<span class="prompt">$</span>xattr -cr <span class="str">"/Applications/Agent Code Monitoring.app"</span>
 </pre>
           </div>
         </div>
@@ -3892,15 +3892,15 @@
                 and starts background services on first boot, so you get monitoring with
                 essentially zero manual setup. Get it from the
                 <a href="https://github.com/billphamhypertek/agent-code-monitoring/releases/latest" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">latest release</a>,
-                from the <code>ClaudeCodeMonitor-dmg</code> / <code>ClaudeCodeMonitor-win</code> CI
+                from the <code>AgentCodeMonitoring-dmg</code> / <code>AgentCodeMonitoring-win</code> CI
                 artifacts, or by building locally with
                 <code>npm run desktop:dmg:arm64</code> / <code>:x64</code> on macOS or
                 <code>npm run desktop:win</code> / <code>desktop:win:portable</code> on Windows. The
                 builds are unsigned / ad-hoc signed by default, so clear the first-launch warning -
-                Gatekeeper on macOS (<code>xattr -cr "/Applications/Claude Code Monitor.app"</code>) or
+                Gatekeeper on macOS (<code>xattr -cr "/Applications/Agent Code Monitoring.app"</code>) or
                 SmartScreen on Windows (<em>More info &rarr; Run anyway</em>). Your SQLite
-                database lives in a per-user data dir (<code>~/Library/Application Support/Claude Code Monitor/data/</code>
-                on macOS, <code>%APPDATA%\Claude Code Monitor\data\</code> on Windows) outside the
+                database lives in a per-user data dir (<code>~/Library/Application Support/Agent Code Monitoring/data/</code>
+                on macOS, <code>%APPDATA%\Agent Code Monitoring\data\</code> on Windows) outside the
                 app bundle, so it survives reinstalls and updates, and the
                 app recovers your shell <code>PATH</code> at startup so <em>Run Claude</em> can
                 launch the <code>claude</code> CLI. See the

@@ -57,8 +57,8 @@ npm run desktop:dmg:arm64    # Apple Silicon only — fast, for your own machine
 npm run desktop:dmg:x64      # Intel only — fast
 
 # Build a Windows .exe (run on Windows x64):
-npm run desktop:win          # NSIS installer → release/ClaudeCodeMonitor-Setup-<ver>-x64.exe
-npm run desktop:win:portable # no-install portable → release/ClaudeCodeMonitor-<ver>-x64-portable.exe
+npm run desktop:win          # NSIS installer → release/AgentCodeMonitoring-Setup-<ver>-x64.exe
+npm run desktop:win:portable # no-install portable → release/AgentCodeMonitoring-<ver>-x64-portable.exe
 ```
 
 > ⚠️ The **universal** macOS build is intentionally slow (it builds the app
@@ -493,13 +493,13 @@ Compiled output lands in `desktop/out/` (git-ignored); packaged artifacts in
 
 ## Packaged app layout
 
-`electron-builder` produces `Claude Code Monitor.app`. The Electron main
+`electron-builder` produces `Agent Code Monitoring.app`. The Electron main
 process code is packed into `app.asar`; the rest of the repo is shipped as
 **`extraResources`** (plain files under `Resources/app/`):
 
 ```mermaid
 flowchart TD
-    app["Claude Code Monitor.app"]
+    app["Agent Code Monitoring.app"]
     app --> contents["Contents/"]
     contents --> macos["MacOS/ — Electron binary"]
     contents --> res["Resources/"]
@@ -621,7 +621,7 @@ the bottleneck; the silent `packaging arch=universal` merge is.
   minute instead of many.
 - Building a **release artifact for everyone** → use the universal
   `desktop:dmg` and expect it to take a while. CI builds the universal DMG and
-  uploads it as the `ClaudeCodeMonitor-dmg` artifact, so you rarely need to
+  uploads it as the `AgentCodeMonitoring-dmg` artifact, so you rarely need to
   build it locally.
 - The bundle is **~80 MB DMG / ~250 MB on disk** regardless — the standard
   Electron tax.
@@ -664,7 +664,7 @@ flowchart TD
 
 An ad-hoc DMG triggers a Gatekeeper warning on first launch. The one-line
 workaround is in [`../DESKTOP.md`](../DESKTOP.md):
-`xattr -cr "/Applications/Claude Code Monitor.app"`.
+`xattr -cr "/Applications/Agent Code Monitoring.app"`.
 
 ---
 
@@ -682,7 +682,7 @@ flowchart LR
     j1 --> j2["tsc build"]
     j2 --> j3["smoke test"]
     j3 --> j4["build universal DMG<br/>(retry on flaky hdiutil detach)"]
-    j4 --> j5["upload ClaudeCodeMonitor-dmg artifact"]
+    j4 --> j5["upload AgentCodeMonitoring-dmg artifact"]
     j5 --> rel["release job (master only)<br/>publish vX.Y.Z if new"]
 
     style job fill:#1f6feb,stroke:#1158c7,color:#fff
@@ -696,7 +696,7 @@ flowchart LR
   `hdiutil detach`, which is intermittently flaky on GitHub macOS runners. The
   step disables Spotlight indexing and retries the build up to 3 times,
   force-detaching any stale volume between attempts.
-- The built DMG is uploaded as the **`ClaudeCodeMonitor-dmg`** artifact
+- The built DMG is uploaded as the **`AgentCodeMonitoring-dmg`** artifact
   (downloadable from the workflow run).
 - On `master`, a follow-on **`release`** job reads the version from
   `package.json` and publishes `vX.Y.Z` as a GitHub Release with the DMG
@@ -754,7 +754,7 @@ else in [`../SETUP.md`](../SETUP.md) applies).
 > **Writable state never lives in the `.app` bundle.** A packaged, code-signed,
 > or app-translocated bundle is read-only; a database written there would break
 > History Import and event persistence. `server-host.ts` points
-> `DASHBOARD_DATA_DIR` at `~/Library/Application Support/Claude Code Monitor/data/`,
+> `DASHBOARD_DATA_DIR` at `~/Library/Application Support/Agent Code Monitoring/data/`,
 > which is also why your imported history survives an app reinstall or update.
 
 ---
@@ -765,7 +765,7 @@ The Electron main process has no console when launched from Finder, so
 `logger.ts` writes to a per-user file:
 
 ```
-~/Library/Logs/Claude Code Monitor/desktop.log
+~/Library/Logs/Agent Code Monitoring/desktop.log
 ```
 
 Reach it from the tray menu → **Show Logs**.
@@ -777,11 +777,11 @@ Reach it from the tray menu → **Show Logs**.
 | DMG build hangs on `packaging arch=universal` | Not hung — the universal merge is slow. See [Build performance](#build-performance--read-this). Use `dmg:arm64` / `dmg:x64` for speed. |
 | `hdiutil detach … exit code 1` in CI | Flaky GitHub runner; the CI step already retries with Spotlight disabled. Re-run the job if it still fails. |
 | Dashboard window is blank | The embedded server failed `/api/health` within 30 s — check `desktop.log`. |
-| Gatekeeper blocks the app | Ad-hoc DMG. `xattr -cr "/Applications/Claude Code Monitor.app"`. |
+| Gatekeeper blocks the app | Ad-hoc DMG. `xattr -cr "/Applications/Agent Code Monitoring.app"`. |
 | Hooks not firing | The app installs hooks on first owned-server boot; start a **new** Claude Code session afterwards. Verify entries in `~/.claude/settings.json`. |
 | "Run Claude" says `claude` isn't on your PATH | `shell-path.ts` recovers the login-shell PATH at startup. If `claude` is a shell _alias_ or _function_ (not a real binary), it cannot be spawned — install the `claude` CLI as an executable. Check `desktop.log` for the `user PATH resolved` line. |
 | `desktop:dev` / `desktop:test` fail with `ERR_DLOPEN_FAILED` | A prior DMG build left `better-sqlite3` built for the other CPU arch. `prebuild.js` auto-heals this on the next build; if needed, run `npm run desktop:install`. |
-| Imported history disappeared after reinstall | Fixed — the database now lives in `~/Library/Application Support/Claude Code Monitor/data/`, outside the bundle. A one-time gap exists only across the upgrade from a build that predated this fix; re-run **Import History → Rescan**. |
+| Imported history disappeared after reinstall | Fixed — the database now lives in `~/Library/Application Support/Agent Code Monitoring/data/`, outside the bundle. A one-time gap exists only across the upgrade from a build that predated this fix; re-run **Import History → Rescan**. |
 
 ---
 
