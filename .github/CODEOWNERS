@@ -1,0 +1,39 @@
+# CODEOWNERS — Agent Code Monitoring
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repo
+*                       @billphamhypertek
+
+# Backend — API, hooks, SQLite, WebSocket
+/server/                @billphamhypertek
+
+# Frontend — React + Vite UI
+/client/                @billphamhypertek
+
+# MCP server integration
+/mcp/                   @billphamhypertek
+
+# Hook installer, import, seed, cleanup utilities
+/scripts/               @billphamhypertek
+
+# VS Code extension
+/vscode-extension/      @billphamhypertek
+
+# Statusline plugin
+/statusline/            @billphamhypertek
+
+# Claude Code plugins
+/plugins/               @billphamhypertek
+
+# Deployment configs (Docker, k8s, etc.)
+/deployments/           @billphamhypertek
+/Dockerfile             @billphamhypertek
+/docker-compose.yml     @billphamhypertek
+
+# CI/CD workflows and GitHub config
+/.github/               @billphamhypertek
+
+# Documentation
+/docs/                  @billphamhypertek
+/wiki/                  @billphamhypertek
+*.md                    @billphamhypertek

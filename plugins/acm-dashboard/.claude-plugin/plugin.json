@@ -1,0 +1,17 @@
+{
+  "name": "acm-dashboard",
+  "description": "Direct MCP integration with the Agent Code Monitoring dashboard — real-time session data access, quick stats, and dashboard health monitoring via Model Context Protocol.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Binh Pham",
+    "url": "https://github.com/billphamhypertek"
+  },
+  "homepage": "https://github.com/billphamhypertek/agent-code-monitoring",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/billphamhypertek/agent-code-monitoring.git"
+  },
+  "license": "MIT",
+  "keywords": ["dashboard", "mcp", "connector", "real-time", "monitoring", "claude-code"],
+  "categories": ["integration", "mcp", "monitoring"]
+}

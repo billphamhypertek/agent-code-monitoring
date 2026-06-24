@@ -1,0 +1,17 @@
+{
+  "name": "acm-devtools",
+  "description": "Developer tools for Agent Code Monitoring — session debugging, hook diagnostics, data export, and system health checks for maintaining a healthy monitoring setup.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Binh Pham",
+    "url": "https://github.com/billphamhypertek"
+  },
+  "homepage": "https://github.com/billphamhypertek/agent-code-monitoring",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/billphamhypertek/agent-code-monitoring.git"
+  },
+  "license": "MIT",
+  "keywords": ["devtools", "debugging", "diagnostics", "export", "health-check", "claude-code"],
+  "categories": ["devtools", "debugging", "diagnostics"]
+}

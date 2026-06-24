@@ -1,0 +1,115 @@
+{
+  "name": "agent-code-monitoring",
+  "displayName": "Agent Code Monitoring",
+  "description": "Professional integrated dashboard for monitoring Claude Code AI agent activity, token usage, and costs directly in VS Code.",
+  "version": "1.2.4",
+  "publisher": "hoangsonw",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Data Science",
+    "Machine Learning",
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:claude-code-monitor-view"
+  ],
+  "main": "./extension.js",
+  "icon": "apple-touch-icon.png",
+  "galleryBanner": {
+    "color": "#0f111a",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/billphamhypertek/agent-code-monitoring"
+  },
+  "homepage": "https://github.com/billphamhypertek/agent-code-monitoring/blob/main/vscode-extension/README.md",
+  "contributes": {
+    "commands": [
+      {
+        "command": "agent-code-monitoring.openDashboard",
+        "title": "Open Agent Code Monitoring",
+        "category": "Claude Code",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "agent-code-monitoring.refreshStatus",
+        "title": "Refresh Dashboard Status",
+        "category": "Claude Code",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "agent-code-monitoring.clearHistory",
+        "title": "Clear Monitor History",
+        "category": "Claude Code",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "agent-code-monitoring.openInBrowser",
+        "title": "Open Dashboard in Browser",
+        "category": "Claude Code",
+        "icon": "$(globe)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "claude-code-monitor",
+          "title": "Agent Code Monitoring",
+          "icon": "icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "claude-code-monitor": [
+        {
+          "id": "claude-code-monitor-view",
+          "name": "Monitor Control Center",
+          "type": "webview"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "agent-code-monitoring.openDashboard",
+          "when": "view == claude-code-monitor-view",
+          "group": "navigation@1"
+        },
+        {
+          "command": "agent-code-monitoring.refreshStatus",
+          "when": "view == claude-code-monitor-view",
+          "group": "navigation@2"
+        },
+        {
+          "command": "agent-code-monitoring.openInBrowser",
+          "when": "view == claude-code-monitor-view",
+          "group": "navigation@3"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "vsce": "^2.15.0"
+  },
+  "scripts": {
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "keywords": [
+    "claude",
+    "anthropic",
+    "ai",
+    "agent",
+    "monitor",
+    "dashboard",
+    "tokens",
+    "llm"
+  ],
+  "author": "Binh Pham",
+  "license": "MIT"
+}

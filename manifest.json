@@ -1,0 +1,28 @@
+{
+  "id": "agent-code-monitoring-landing",
+  "name": "Agent Code Monitoring",
+  "short_name": "CC Monitor",
+  "description": "Local-first monitoring dashboard for Claude Code sessions.",
+  "author": "Binh Pham",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "theme_color": "#6366f1",
+  "background_color": "#07070b",
+  "orientation": "any",
+  "categories": ["developer-tools", "productivity"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

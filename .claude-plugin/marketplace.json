@@ -1,0 +1,42 @@
+{
+  "name": "agent-code-monitoring-plugins",
+  "description": "Official plugin marketplace for Agent Code Monitoring — analytics, productivity, developer tools, insights, and dashboard connectivity plugins for monitoring and optimizing your Claude Code sessions.",
+  "owner": {
+    "name": "billphamhypertek",
+    "url": "https://github.com/billphamhypertek"
+  },
+  "homepage": "https://github.com/billphamhypertek/agent-code-monitoring",
+  "repository": "https://github.com/billphamhypertek/agent-code-monitoring",
+  "plugins": [
+    {
+      "name": "acm-analytics",
+      "path": "plugins/acm-analytics",
+      "description": "Deep analytics on Claude Code sessions — token usage (total_input/total_output/total_cache_read/total_cache_write with compaction baselines pre-summed), cost breakdowns via the pricing engine, usage trends over 365 days, and productivity scoring.",
+      "tags": ["analytics", "tokens", "cost", "productivity"]
+    },
+    {
+      "name": "acm-productivity",
+      "path": "plugins/acm-productivity",
+      "description": "Productivity automation — daily standups, weekly reports, sprint summaries from session data, and workflow optimization using the workflow intelligence API's 11 datasets.",
+      "tags": ["productivity", "reports", "workflows", "standup"]
+    },
+    {
+      "name": "acm-devtools",
+      "path": "plugins/acm-devtools",
+      "description": "Developer tools for the Agent Monitor — session debugging with full event chain inspection, hook diagnostics, data export (JSON/CSV/Markdown), and system health checks.",
+      "tags": ["devtools", "debug", "diagnostics", "export"]
+    },
+    {
+      "name": "acm-insights",
+      "path": "plugins/acm-insights",
+      "description": "AI-powered insights — pattern detection via workflow intelligence (tool flow transitions, agent co-occurrence), anomaly alerting, optimization recommendations, and session comparison.",
+      "tags": ["insights", "patterns", "anomaly", "optimization"]
+    },
+    {
+      "name": "acm-dashboard",
+      "path": "plugins/acm-dashboard",
+      "description": "Dashboard connector — quick status checks, one-line metrics, and MCP server integration for direct tool access to the Agent Monitor API.",
+      "tags": ["dashboard", "status", "mcp", "connector"]
+    }
+  ]
+}

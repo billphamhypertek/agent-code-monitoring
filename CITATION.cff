@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+title: "Agent Code Monitoring for Claude Code"
+type: software
+authors:
+  - family-names: "Pham"
+    given-names: "Binh"
+abstract: "Real-time dashboard for tracking Claude Code agent activity."
+repository-code: "https://github.com/billphamhypertek/agent-code-monitoring"
+url: "https://github.com/billphamhypertek/agent-code-monitoring"
+version: "1.1.0"
+license: "MIT"
+keywords:
+  - "claude"
+  - "agent"
+  - "dashboard"
+  - "monitoring"
+  - "websocket"
+  - "sqlite"

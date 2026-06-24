@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "acm-dashboard": {
+      "command": "node",
+      "args": ["../../mcp/build/index.js"],
+      "env": {
+        "ACM_DASHBOARD_URL": "http://localhost:4820"
+      }
+    }
+  }
+}

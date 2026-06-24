@@ -1,0 +1,5 @@
+# https://billphamhypertek.github.io/agent-code-monitoring/
+User-agent: *
+Allow: /
+
+Sitemap: https://billphamhypertek.github.io/agent-code-monitoring/sitemap.xml
