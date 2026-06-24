@@ -27,14 +27,19 @@
 name: 🚀 CI / CD Pipeline for Agent Code Monitoring
 
 on:
-  push:
-    branches: ["**"]
-    # CLA signature commits (made by github-actions[bot] via cla.yml) only touch
-    # this path — skip the full CI/CD pipeline for them.
-    paths-ignore:
-      - "signatures/**"
-  pull_request:
-    branches: ["**"]
+  # TEMPORARILY DISABLED: automatic push/PR triggers are turned off so this
+  # pipeline only runs when started manually from the Actions tab. To re-enable,
+  # uncomment the `push:` and `pull_request:` blocks below and remove
+  # `workflow_dispatch:` if it is not otherwise wanted.
+  workflow_dispatch:
+  # push:
+  #   branches: ["**"]
+  #   # CLA signature commits (made by github-actions[bot] via cla.yml) only touch
+  #   # this path — skip the full CI/CD pipeline for them.
+  #   paths-ignore:
+  #     - "signatures/**"
+  # pull_request:
+  #   branches: ["**"]
 
 env:
   NODE_VERSION: "22"
